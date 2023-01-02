@@ -1,6 +1,6 @@
 
 import './App.css';
-import SIPCalculator from './Components/SIPCalculator';
+import SIPCalculator from './SIPCalculator';
 
 function App() {
   return (
