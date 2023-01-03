@@ -170,7 +170,7 @@ function SipCalculator() {
 
 {/* --------------------------------Start of container2-------------------------------------- */}
 
-<section class="white-section">
+        <section class="white-section">
 			<div className='container2'>
 				<h3>What is meant by SIP?</h3>
 				<p>A Systematic Investment Plan (SIP), more popularly known as SIP, is a facility offered by mutual funds to the investors to invest in a disciplined manner. SIP facility allows an investor to invest a fixed amount of money at pre-defined intervals in the selected mutual fund scheme. The fixed amount of money can be as low as Rs. 500, while the pre-defined SIP intervals can be on a weekly/monthly/quarterly/semi-annually or annual basis. By taking the SIP route to investments, the investor invests in a time-bound manner without worrying about the market dynamics and stands to benefit in the long-term due to average costing and power of compounding.
