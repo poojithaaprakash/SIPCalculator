@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import "./index.css";
+import SliderComponent from './SliderComponent';
 
 function SipCalculator() {
 	const [amount, setAmount] = useState(0);
-	// const [totallyInvestedAmount, settotallyInvestedAmount] = useState('');
+	const [newtotallyInvestedAmount, setTotallyInvestedAmount] = useState(0);
 	const [numberOfMonths, setnumberOfMonths] = useState(0);
 	const [selectedCrypto, setSelectedCrypto] = useState('bitcoin');
-	const [amountOfCryptoBought, setamountOfCryptoBought] = useState(0);
-	const [valueOfCryptoToday, setvalueOfCryptoToday] = useState(0);
+	const [newAmountOfCryptoBought, setNewAmountOfCryptoBought] = useState(0);
+	const [newValueOfCryptoToday, setNewValueOfCryptoToday] = useState(0);
 	const [result, setResult] = useState(0);
 
 	const handleAmountChange = (event) => {
@@ -40,6 +41,7 @@ function SipCalculator() {
 				const newnumberOfMonths = Math.round(newnumberOfDays / 30);
 
 				const totallyInvestedAmount = amount * newnumberOfMonths;
+				setTotallyInvestedAmount(totallyInvestedAmount)
 
 				// Calculating the avgPrice by taking every 30th price point
 				let avgPrice = 0;
@@ -51,47 +53,144 @@ function SipCalculator() {
 				avgPrice /= numberOfMonths;
 				console.log({ avgPrice });
 
-				setamountOfCryptoBought(totallyInvestedAmount / avgPrice);
-				setvalueOfCryptoToday(amountOfCryptoBought * price[newnumberOfDays - 1][1]);
-				setResult(
-					((valueOfCryptoToday - totallyInvestedAmount) / totallyInvestedAmount) * 100
-				);
+				const amountOfCryptoBought=(totallyInvestedAmount / avgPrice);
+				const valueOfCryptoToday=(amountOfCryptoBought * price[newnumberOfDays - 1][1]);
+
+				setNewAmountOfCryptoBought(amountOfCryptoBought)
+				setNewValueOfCryptoToday(valueOfCryptoToday)
+
+				const totalReturns = ((valueOfCryptoToday - totallyInvestedAmount) / totallyInvestedAmount) * 100;
+
+				setResult(totalReturns)
+
 			});
 	};
 
 	return (
 		<div>
+		<section className='colored-section'>
+			<div className='header'>
 			<h1 className='heading'>Crypto SIP Calculator</h1>
+			</div> 
+{/* --------------------------------end of header--------------------------------------- */}
+			<div className='container1'>
+{/* --------------------------------Start of Left-Card-------------------------------------- */}
+				<div className="left-card" >
+					<div className="left-card-body">
 
-			<label>
-				Invested Amount
-				<input type='number' value={amount} onChange={handleAmountChange} />
-			</label>
+					<div className="container overflow-hidden">
+						<div className="row gy-5">
 
-			{/* <input type="text" value={frequency} onChange={handleFrequencyChange} /> */}
+{/* --------------------------------Start of Invested-Amount-Display--------------------------------------- */}
+							<div className="col-6"> 
+								<div className="p-3 ">
+								<label>Invested Amount</label>
+								<div class="input-group mb-3">
+									<span class="input-group-text">$</span>
+									<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value={amount} onChange={handleAmountChange}/>
+									<span class="input-group-text">.00</span>
+								</div>
+								</div>
+							</div>
+{/* --------------------------------end of Invested-Amount-Display--------------------------------------- */}
 
-			<label>
-				Time Period
-				<input type='number' value={numberOfMonths} onChange={handlenumberOfMonthsChange} />
-			</label>
+{/* --------------------------------Start of Time-Period--------------------------------------- */}
+							<div className="col-6">
+								<div className="p-3 ">
+									<label for="customRange3" class="form-label">Time Period: <span>{numberOfMonths}</span></label>
+									<input type="range" class="form-range" min="0" max="60" step="1" id="customRange3" value={numberOfMonths} onChange={handlenumberOfMonthsChange}/>
+								</div>
+							</div>
+{/* --------------------------------End of Time-Period--------------------------------------- */}
 
-			<label>
-				Select the Crypto
-				<select value={selectedCrypto} onChange={handleCryptoChange}>
-					<option value='bitcoin'>bitcoin</option>
-					<option value='ethereum'>ethereum</option>
-					<option value='tether'>litecoin</option>
-					<option value='binancecoin'>binancecoin</option>
-					<option value='ripple'>ripple</option>
-				</select>
-			</label>
+{/* --------------------------------Start of Select-Crypto--------------------------------------- */}
+							<div className="col-6">
+								<div className="p-3 ">
+									<div className='selectCrypto'>
+										<label>Select the Crypto</label>
+										<select value={selectedCrypto} onChange={handleCryptoChange} className="form-select" aria-label="Default select example">
+											<option value='bitcoin'>bitcoin</option>
+											<option value='ethereum'>ethereum</option>
+											<option value='tether'>litecoin</option>
+											<option value='binancecoin'>binancecoin</option>
+											<option value='ripple'>ripple</option>
+										</select>
+									</div>
+								</div>
+							</div>
+{/* --------------------------------End of Select-Crypto-------------------------------------- */}
+						</div>
+					</div>
+					<button type="button" className="btn btn-outline-info" onClick={calculateSip}>Calculate</button>
+					<button type="button" className="btn btn-outline-info" onClick={calculateSip}>Reset</button>
 
-			<button onClick={calculateSip}>Calculate</button>
+{/* --------------------------------Start of Bottom-Card-------------------------------------- */}
+						<div className='card-bottom'>
+							<div className='card-bottom'>
+							<table class="table">
+								<thead>
+									<tr>
+									<th scope="col">Total Invested</th>
+									<th scope="col">Amount Of Crypto Bought</th>
+									<th scope="col">Value Of Crypto Today</th>
+									<th scope="col">Total Return</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+									<td>{newtotallyInvestedAmount}</td>
+									<td>{newAmountOfCryptoBought}</td>
+									<td>{newValueOfCryptoToday}</td>
+									<td>{result}</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+{/* --------------------------------End of Bottom-Card-------------------------------------- */}
+					</div>          {/* ---------Left-Card-Body------ */}
+				</div>              {/* ---------Left-Card------ */}
+{/* --------------------------------End of Left-Card-------------------------------------- */}
 
-			<div>Total Invested: {amount}</div>
-			<div>Amount Of Crypto Bought: {amountOfCryptoBought}</div>
-			<div>value Of Crypto Today: {valueOfCryptoToday}</div>
-			<div>Total Return: {result}</div>
+
+{/* --------------------------------start of Right-Card-------------------------------------- */}
+
+				<div className="right-card">
+					<div className="right-card-body">
+					<div>Total Invested: {newtotallyInvestedAmount}</div>
+						<div>Amount Of Crypto Bought: {newAmountOfCryptoBought}</div>
+						<div>value Of Crypto Today: {newValueOfCryptoToday}</div>
+						<div>Total Return: {result}</div>
+					</div>
+				</div>
+			</div>
+{/* --------------------------------End of Right-Card-------------------------------------- */}
+{/* --------------------------------End of container1-------------------------------------- */}
+		</section>
+
+{/* --------------------------------Start of container2-------------------------------------- */}
+
+<section class="white-section">
+			<div className='container2'>
+				<h3>What is meant by SIP?</h3>
+				<p>A Systematic Investment Plan (SIP), more popularly known as SIP, is a facility offered by mutual funds to the investors to invest in a disciplined manner. SIP facility allows an investor to invest a fixed amount of money at pre-defined intervals in the selected mutual fund scheme. The fixed amount of money can be as low as Rs. 500, while the pre-defined SIP intervals can be on a weekly/monthly/quarterly/semi-annually or annual basis. By taking the SIP route to investments, the investor invests in a time-bound manner without worrying about the market dynamics and stands to benefit in the long-term due to average costing and power of compounding.
+
+Mutual funds and other investment companies offer investors a variety of investment options including systematic investment plans. SIPs give investors a chance to invest small sums of money over a longer period of time rather than having to make large lump sums all at once. Most SIPs require payments into the plans on a consistent basis—whether that's weekly, monthly, or quarterly.</p>
+
+				<h3>How does SIP Calculator work?</h3>
+				<p>
+				A SIP calculator is a simple tool that allows individuals to get an idea of the returns on their mutual fund investments made through SIP.  SIP investments in mutual funds have become one of the most popular investment options for millennials lately.
+
+These mutual fund sip calculators are designed to give potential investors an estimate on their mutual fund investments. However, the actual returns offered by a mutual fund scheme varies depending on various factors. The SIP calculator does not provide clarification for the exit load and expense ratio (if any). This calculator will calculate the wealth gain and expected returns for your monthly SIP investment. Indeed, you get a rough estimate on the maturity amount for any of your monthly SIP, based on a projected annual return rate.
+
+				</p>
+			</div>
+</section>
+			
+{/* 
+			<div className='footer'>
+				copyrights poojitha
+			</div> */}
 		</div>
 	);
 }
