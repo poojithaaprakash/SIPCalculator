@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import "./index.css";
-import SliderComponent from './SliderComponent';
+// import SliderComponent from './SliderComponent';
+import CoinEntry from './CoinEntry';
+import Coin from './Coin';
 
 function SipCalculator() {
 	const [amount, setAmount] = useState(0);
@@ -66,6 +68,7 @@ function SipCalculator() {
 			});
 	};
 
+	
 	return (
 		<div>
 		<section className='colored-section'>
@@ -109,11 +112,11 @@ function SipCalculator() {
 									<div className='selectCrypto'>
 										<label>Select the Crypto</label>
 										<select value={selectedCrypto} onChange={handleCryptoChange} className="form-select" aria-label="Default select example">
-											<option value='bitcoin'>bitcoin</option>
-											<option value='ethereum'>ethereum</option>
-											<option value='tether'>litecoin</option>
+											<option value='bitcoin'>Bitcoin</option>
+											<option value='ethereum'>Ethereum</option>
+											<option value='cardano'>Cardano</option>
 											<option value='binancecoin'>binancecoin</option>
-											<option value='ripple'>ripple</option>
+											<option value='matic-network'>Matic Network</option>
 										</select>
 									</div>
 								</div>
@@ -157,11 +160,9 @@ function SipCalculator() {
 
 				<div className="right-card">
 					<div className="right-card-body">
-					<div>Total Invested: {newtotallyInvestedAmount}</div>
-						<div>Amount Of Crypto Bought: {newAmountOfCryptoBought}</div>
-						<div>value Of Crypto Today: {newValueOfCryptoToday}</div>
-						<div>Total Return: {result}</div>
+					<div>
 					</div>
+				</div>
 				</div>
 			</div>
 {/* --------------------------------End of Right-Card-------------------------------------- */}
@@ -170,26 +171,45 @@ function SipCalculator() {
 
 {/* --------------------------------Start of container2-------------------------------------- */}
 
-        <section class="white-section">
-			<div className='container2'>
-				<h3>What is meant by SIP?</h3>
-				<p>A Systematic Investment Plan (SIP), more popularly known as SIP, is a facility offered by mutual funds to the investors to invest in a disciplined manner. SIP facility allows an investor to invest a fixed amount of money at pre-defined intervals in the selected mutual fund scheme. The fixed amount of money can be as low as Rs. 500, while the pre-defined SIP intervals can be on a weekly/monthly/quarterly/semi-annually or annual basis. By taking the SIP route to investments, the investor invests in a time-bound manner without worrying about the market dynamics and stands to benefit in the long-term due to average costing and power of compounding.
 
-Mutual funds and other investment companies offer investors a variety of investment options including systematic investment plans. SIPs give investors a chance to invest small sums of money over a longer period of time rather than having to make large lump sums all at once. Most SIPs require payments into the plans on a consistent basis—whether that's weekly, monthly, or quarterly.</p>
 
-				<h3>How does SIP Calculator work?</h3>
-				<p>
-				A SIP calculator is a simple tool that allows individuals to get an idea of the returns on their mutual fund investments made through SIP.  SIP investments in mutual funds have become one of the most popular investment options for millennials lately.
+<section className="white-section" >
+<div className='container2'>
+<div id="carouselExampleControls" className="carousel slide" data-bs-ride="false">
+  <div className="carousel-inner">
+    <div className="carousel-item active">
+		<h3>What is meant by SIP?</h3>
+		<p>A Systematic Investment Plan (SIP), more popularly known as SIP, is a facility offered by mutual funds to the investors to invest in a disciplined manner. SIP facility allows an investor to invest a fixed amount of money at pre-defined intervals in the selected mutual fund scheme. The fixed amount of money can be as low as Rs. 500, while the pre-defined SIP intervals can be on a weekly/monthly/quarterly/semi-annually or annual basis. By taking the SIP route to investments, the investor invests in a time-bound manner without worrying about the market dynamics and stands to benefit in the long-term due to average costing and power of compounding.Mutual funds and other investment companies offer investors a variety of investment options including systematic investment plans.</p>
+    </div>
+    <div className="carousel-item">
+		<h3>How does SIP Calculator work?</h3>
+		<p>A SIP calculator is a simple tool that allows individuals to get an idea of the returns on their mutual fund investments made through SIP.  SIP investments in mutual funds have become one of the most popular investment options for millennials lately.These mutual fund sip calculators are designed to give potential investors an estimate on their mutual fund investments. However, the actual returns offered by a mutual fund scheme varies depending on various factors. The SIP calculator does not provide clarification for the exit load and expense ratio (if any). This calculator will calculate the wealth gain and expected returns for your monthly SIP investment. Indeed, you get a rough estimate on the maturity amount for any of your monthly SIP, based on a projected annual return rate.</p>
+	
+    </div>
+  </div>
 
-These mutual fund sip calculators are designed to give potential investors an estimate on their mutual fund investments. However, the actual returns offered by a mutual fund scheme varies depending on various factors. The SIP calculator does not provide clarification for the exit load and expense ratio (if any). This calculator will calculate the wealth gain and expected returns for your monthly SIP investment. Indeed, you get a rough estimate on the maturity amount for any of your monthly SIP, based on a projected annual return rate.
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
 
-				</p>
-			</div>
-</section>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+</div>  
+</div> 
+  </section>
+
+
+
+
 			
-{/* 
-			<div className='footer'>
-				copyrights poojitha
+
+			{/* <div className='footer'>
+			Made By Poojitha
+			<p>Made By Poojitha</p>
+				
 			</div> */}
 		</div>
 	);
