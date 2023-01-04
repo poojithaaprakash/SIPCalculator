@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./index.css";
-// import SliderComponent from './SliderComponent';
-// import CoinEntry from './CoinEntry';
 import Coin from "./Coin";
 
 function SipCalculator() {
