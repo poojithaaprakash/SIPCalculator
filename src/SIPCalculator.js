@@ -55,16 +55,12 @@ function SipCalculator() {
         console.log({ avgPrice });
 
         const amountOfCryptoBought = totallyInvestedAmount / avgPrice;
-        const valueOfCryptoToday =
-          amountOfCryptoBought * price[newnumberOfDays - 1][1];
+        const valueOfCryptoToday = (amountOfCryptoBought * price[newnumberOfDays - 1][1]).toFixed(2);
 
         setNewAmountOfCryptoBought(amountOfCryptoBought);
         setNewValueOfCryptoToday(valueOfCryptoToday);
 
-        const totalReturns =
-          ((valueOfCryptoToday - totallyInvestedAmount) /
-            totallyInvestedAmount) *
-          100;
+        const totalReturns =(((valueOfCryptoToday - totallyInvestedAmount) /totallyInvestedAmount) *100).toFixed(2);
 
         setResult(totalReturns);
       });
@@ -74,7 +70,7 @@ function SipCalculator() {
     <div>
       <section className="colored-section">
         <div className="header">
-          <h1 className="heading">Crypto SIP Calculator</h1>
+          <h1 className="heading">CRYPTOCURRENCY SIP CALCULATOR</h1>
         </div>
         {/* --------------------------------end of header--------------------------------------- */}
         <div className="container1">
@@ -105,12 +101,12 @@ function SipCalculator() {
                   {/* --------------------------------Start of Time-Period--------------------------------------- */}
                   <div className="col-6">
                     <div className="p-3 ">
-                      <label for="customRange3" class="form-label">
+                      <label for="customRange3" className="form-label">
                         Time Period: <span>{numberOfMonths}</span>
                       </label>
                       <input
                         type="range"
-                        class="form-range"
+                        className="form-range"
                         min="0"
                         max="60"
                         step="1"
@@ -136,8 +132,8 @@ function SipCalculator() {
                           <option value="bitcoin">Bitcoin</option>
                           <option value="ethereum">Ethereum</option>
                           <option value="cardano">Cardano</option>
-                          <option value="binancecoin">binancecoin</option>
-                          <option value="matic-network">Matic Network</option>
+                          <option value="litecoin">Litecoin</option>
+                          <option value="ripple">Ripple</option>
                         </select>
                       </div>
                     </div>
@@ -152,14 +148,7 @@ function SipCalculator() {
               >
                 Calculate
               </button>
-              <button
-                type="button"
-                className="btn btn-outline-info"
-                onClick={calculateSip}
-              >
-                Reset
-              </button>
-
+              
               {/* --------------------------------Start of Bottom-Card-------------------------------------- */}
               <div className="card-bottom">
                 <div className="card-bottom">
@@ -174,10 +163,10 @@ function SipCalculator() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{newtotallyInvestedAmount}</td>
+                        <td><span>$</span>{newtotallyInvestedAmount}</td>
                         <td>{newAmountOfCryptoBought}</td>
-                        <td>{newValueOfCryptoToday}</td>
-                        <td>{result}</td>
+                        <td><span>$</span>{newValueOfCryptoToday}</td>
+                        <td>{result}<span>%</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -192,7 +181,10 @@ function SipCalculator() {
           {/* --------------------------------start of Right-Card-------------------------------------- */}
           <div className="right-card">
             <div className="right-card-body">
-              <div>{Coin[0][selectedCrypto]["meaning"]}</div>
+              <div>
+              <h6><span>{Coin[0][selectedCrypto]["symbol"]}</span> {Coin[0][selectedCrypto]["name"]} </h6>
+              <p>{Coin[0][selectedCrypto]["meaning"]}</p>
+              </div>
             </div>
           </div>
         </div>
